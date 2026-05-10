@@ -2,6 +2,26 @@ package orui
 
 import rl "vendor:raylib"
 
+bounding_rect :: proc() -> rl.Rectangle {
+	ctx := current_context
+	elem_id := ctx.current
+	prev_buf := previous_buffer(ctx)
+	if ctx.element_count[prev_buf] < elem_id ||
+	   ctx.elements[prev_buf][elem_id].id != ctx.current_id {
+		index, ok := element_index_by_id(ctx, prev_buf, ctx.current_id)
+		if !ok do return {}
+		elem_id = index
+	}
+
+	element := &ctx.elements[prev_buf][elem_id]
+	return rl.Rectangle {
+		x = element._position.x,
+		y = element._position.y,
+		width = element._size.x,
+		height = element._size.y,
+	}
+}
+
 hovered :: proc {
 	_hovered,
 	_hovered_string,

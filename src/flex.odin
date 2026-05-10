@@ -472,6 +472,7 @@ flex_fit_height :: proc(ctx: ^Context, element: ^Element) {
 		return
 	}
 
+
 	if element.direction == .TopToBottom {
 		flex_fit_height_column(ctx, element)
 	} else {
@@ -580,6 +581,7 @@ flex_fit_height_row_unwrapped :: proc(ctx: ^Context, element: ^Element) {
 			max_child = child_height
 		}
 		child = child_element.next
+
 	}
 	element._size.y = max_child + y_padding(element) + y_border(element)
 }
@@ -758,6 +760,8 @@ flex_distribute_heights_row_unwrapped :: proc(ctx: ^Context, element: ^Element) 
 	}
 
 	element._content_size.y = max_height
+
+
 }
 
 @(private)
