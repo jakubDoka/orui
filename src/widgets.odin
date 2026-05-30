@@ -112,6 +112,8 @@ scrollbar :: proc(
 	handle_config: ElementConfig,
 	index := 0,
 	loc := #caller_location,
+) -> (
+	captures: bool,
 ) {
 	ctx := current_context
 	background_id := to_id(parent, (index * 2) + 1)
@@ -144,8 +146,10 @@ scrollbar :: proc(
 	handle_element.capture = .False
 	end_element()
 
+	captures = captured(background_id)
+
 	// handle mouse events
-	if captured(background_id) {
+	if captures {
 		scrollbar_background := get_element(background_id)
 		scroll_container := get_element(parent)
 		scroll_offset := scroll_container.scroll.offset
@@ -172,4 +176,6 @@ scrollbar :: proc(
 	}
 
 	end_element()
+
+	return
 }

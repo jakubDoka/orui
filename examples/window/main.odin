@@ -1,7 +1,6 @@
 package demo
 
 import orui "../../src"
-import "core:fmt"
 import "core:log"
 import "core:math"
 import "core:os"
